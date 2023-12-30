@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <regex>
+#include <fstream>
 
 namespace line_parser{
 
@@ -132,4 +133,45 @@ namespace line_parser{
     }
     }
 
+}
+
+namespace random_number
+{
+    std::vector<int> rgen(int s, int n, int l, int c) 
+    {
+        
+        std::vector<int> result;
+        std::ifstream urandom("/dev/urandom", std::ios::in|std::ios::binary);
+
+        char my_random_char[4];
+        urandom.read(my_random_char, sizeof(my_random_char));
+
+        int random_number[4];
+        for (int i = 0; i < 4; ++i)
+        {
+            random_number[i] = static_cast<int>(static_cast<unsigned char>(my_random_char[i]));
+            if(i == 0)
+            {
+                random_number[i] = random_number[i] % (s - 2 + 1) + 2;
+            }
+            else if(i == 1)
+            {
+                random_number[i] = random_number[i] % (n - 1 + 1) + 1;
+            }
+            else if(i == 2)
+            {
+                random_number[i] = random_number[i] % (l - 5 + 1) + 5;
+            }
+            else if(i == 3)
+            {
+                random_number[i] = random_number[i] % (c - (-c) + 1) + (-c);
+            }
+            
+            result.push_back(random_number[i]);
+        }
+
+        urandom.close();
+        return result;
+
+    }
 }
