@@ -14,6 +14,7 @@ int main(int argc, char** argv) {
 
         std::string line;
         std::getline(std::cin, line);
+        std::cout << line << std::endl;
 
         // get the command from the line
         std::string command = line_parser::get_command(line, graph);
