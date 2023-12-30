@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8...3.13)
 project(random_graph_shortest_path)
 
-## ECE650 Specific configuration start here
 ## Project specific configurations go here
 
 # enable c++11 support
@@ -16,8 +15,10 @@ endif()
 
 # create the main executable
 ## add additional .cpp files if needed
+add_executable(find_shortest_path find_shortest_path.cpp )
 add_executable(main main.cpp )
 
 # create the executable for tests
 add_executable(tests test.cpp)
-
+install(PROGRAMS input_parser.py DESTINATION bin)
+install(TARGETS find_shortest_path main RUNTIME DESTINATION bin)
