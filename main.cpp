@@ -10,7 +10,7 @@ int input_parser_process(void)
     //run the input_parser executable
     char* args[3];
     args[0] = "python";
-    args[1] = "../input_parser.py";
+    args[1] = "./input_parser.py";
     args[2] = nullptr;
     execvp(args[0], args);
 

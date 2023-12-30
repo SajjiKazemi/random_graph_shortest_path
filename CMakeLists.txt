@@ -5,8 +5,7 @@ project(random_graph_shortest_path)
 
 # enable c++11 support
 set (CMAKE_CXX_FLAGS "-std=c++11 -Wall ${CMAKE_CXX_FLAGS}")
-# set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/run)
-set (CMAKE_BUILD_TYPE Debug)
+set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/run)
 
 option(WITH_ASAN "Enabled AddressSanitizer to detect memory faults" OFF)
 if(WITH_ASAN)
@@ -23,4 +22,5 @@ add_executable(rgen rgen.cpp helpers.cpp MyGraph.cpp BFStree.cpp)
 # create the executable for tests
 add_executable(tests test.cpp helpers.cpp MyGraph.cpp BFStree.cpp)
 install(PROGRAMS input_parser.py DESTINATION bin)
-install(TARGETS find_shortest_path main RUNTIME DESTINATION bin)
+install(PROGRAMS helpers.py vertexCover.py DESTINATION bin)
+install(TARGETS find_shortest_path main rgen RUNTIME DESTINATION bin)
