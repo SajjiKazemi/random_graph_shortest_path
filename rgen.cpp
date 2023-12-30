@@ -61,7 +61,7 @@ int main(int argc, char **argv)
     int waiting_time = 0;
     double count = 0;
 
-    while (std::cin.eof() == false)
+    while (!std::cin.eof())
     {
         
         int trial_number = 0;
@@ -74,7 +74,7 @@ int main(int argc, char **argv)
             int street_numbers = rgen_needs::rgen(s, 2);
             for (int i=0; i<street_numbers; i++)
             {
-                streets_name.push_back("\"street_" + std::to_string(i) + "\"");
+                streets_name.push_back("street_" + std::to_string(i));
             }
 
             waiting_time = rgen_needs::rgen(l, 5);
@@ -115,10 +115,11 @@ int main(int argc, char **argv)
             old_streets_name = streets_name;
         }
 
-        for (auto& line : command_lines)
-        {
-            std::cout << line << std::endl;
-        }
+        // for (auto& line : command_lines)
+        // {
+        //     std::cout << line;
+        //     std::cout << std::endl;
+        // }
         sleep(waiting_time);
     }
 
