@@ -177,8 +177,8 @@ class vertexCover:
     
     def print_vertices_command(self):
         print(f"V {len(self.vertices)}", file=sys.stdout)
-        print("", file=sys.stdout)
-    
+        sys.stdout.flush()   
+
     def print_edges(self):
         print("E = {", file=sys.stdout)
         n = len(self.edges)
@@ -192,4 +192,4 @@ class vertexCover:
     def print_edges_command(self):
         edges_str = ','.join(f"{edge}" for edge in self.edges)
         print(f"E {{{edges_str}}}", file=sys.stdout)
-        print("", file=sys.stdout)
+        sys.stdout.flush()
