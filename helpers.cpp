@@ -196,22 +196,30 @@ namespace rgen_needs
         {
             for (std::vector<int>::size_type i = 0; i < old_streets_name.size(); i++)
             {
-                command = "rm " + old_streets_name[i];
+                command = "rm \"" + old_streets_name[i] + "\"";
+                std::cout << "rm \"" << old_streets_name[i] << "\"" << std::endl;
+                //std::cout << command << std::endl;
                 command_lines.push_back(command);
             }
         }
         for (std::vector<int>::size_type i = 0; i < streets_name.size(); i++)
         {
-            command = "add " + streets_name[i];
+            command = "add \"" + streets_name[i] + "\" ";
+            std::cout << "add \"" << streets_name[i] << "\" ";
 
             for (std::vector<int>::size_type j = 0; j < streets_coordinates[i].size(); j++)
             {
-                command = command + " (" + std::to_string(streets_coordinates[i][j].first) + "," + std::to_string(streets_coordinates[i][j].second) + ")"; 
-            } 
+                command = command + "(" + std::to_string(streets_coordinates[i][j].first) + "," + std::to_string(streets_coordinates[i][j].second) + ")";
+                std::cout << "(" << streets_coordinates[i][j].first << "," << streets_coordinates[i][j].second << ")";
+            }
+            std::cout << std::endl;
+            //command = command + "\n";
+            //std::cout << command << std::endl; 
             command_lines.push_back(command);
         }
 
         command_lines.push_back("gg");
+        std::cout << "gg" << std::endl;
         return command_lines;
     }
     
