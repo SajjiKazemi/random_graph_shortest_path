@@ -17,8 +17,9 @@ endif()
 ## add additional .cpp files if needed
 add_executable(find_shortest_path find_shortest_path.cpp )
 add_executable(main main.cpp )
+add_executable(rgen rgen.cpp helpers.cpp MyGraph.cpp BFStree.cpp)
 
 # create the executable for tests
-add_executable(tests test.cpp)
+add_executable(tests test.cpp helpers.cpp MyGraph.cpp BFStree.cpp)
 install(PROGRAMS input_parser.py DESTINATION bin)
 install(TARGETS find_shortest_path main RUNTIME DESTINATION bin)
