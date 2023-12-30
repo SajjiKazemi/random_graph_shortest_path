@@ -19,13 +19,16 @@ int input_parser_process(void)
 // Entry point of process rgen
 int rgen_process(void) 
 {
-    //run the rgen executable
-    while (std::cin.eof() == false)
+    std::vector<std::string> lines;
+    lines.push_back("add \"Weber Street\" (2,-1) (2,2) (5,5) (5,6) (3,8)");
+    lines.push_back("add \"King Street S\" (4,2) (4,8)");
+    lines.push_back("add \"Davenport Road\" (1,4) (5,8)");
+    lines.push_back("gg");
+    for (auto& line : lines)
     {
-        std::string line;
-        std::getline(std::cin, line);
         std::cout << line << std::endl;
     }
+    
     return 0;
 }
     
