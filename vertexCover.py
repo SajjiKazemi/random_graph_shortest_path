@@ -175,6 +175,10 @@ class vertexCover:
             print(f"  {vertex}: ({formatted_value})")
         print("}")
     
+    def print_vertices_command(self):
+        print(f"V {len(self.vertices)}")
+        print("\n")
+    
     def print_edges(self):
         print("E = {")
         n = len(self.edges)
@@ -184,3 +188,8 @@ class vertexCover:
             else:
                 print(f"  {edge}")
         print("}")
+    
+    def print_edges_command(self):
+        edges_str = ','.join(f"{edge}" for edge in self.edges)
+        print(f"E {{{edges_str}}}")
+        print("\n")

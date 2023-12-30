@@ -48,8 +48,8 @@ def main():
                     print('Error: You need at least one street to draw', file=sys.stderr)
                     continue
                 vertex_cover.update_vertices()
-                vertex_cover.print_vertices()
-                vertex_cover.print_edges()
+                vertex_cover.print_vertices_command()
+                vertex_cover.print_edges_command()
         except Exception as e:
             print('Error: ' + str(e), file=sys.stderr)
     # return exit code 0 on successful termination
