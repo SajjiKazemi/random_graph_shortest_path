@@ -137,47 +137,88 @@ namespace line_parser{
 
 namespace rgen_needs
 {
-    std::vector<int> rgen(int s, int n, int l, int c) 
-    {
-        
-        std::vector<int> result;
-        std::ifstream urandom("/dev/urandom", std::ios::in|std::ios::binary);
-
-        char my_random_char[4];
-        urandom.read(my_random_char, sizeof(my_random_char));
-
-        int random_number[4];
-        for (int i = 0; i < 4; ++i)
+    int rgen(int maximum, int minimum)
         {
-            random_number[i] = static_cast<int>(static_cast<unsigned char>(my_random_char[i]));
-            if(i == 0)
-            {
-                random_number[i] = random_number[i] % (s - 2 + 1) + 2;
-            }
-            else if(i == 1)
-            {
-                random_number[i] = random_number[i] % (n - 1 + 1) + 1;
-            }
-            else if(i == 2)
-            {
-                random_number[i] = random_number[i] % (l - 5 + 1) + 5;
-            }
-            else if(i == 3)
-            {
-                random_number[i] = random_number[i] % (c - (-c) + 1) + (-c);
-            }
-            
-            result.push_back(random_number[i]);
+            int random_number;
+            std::ifstream urandom("/dev/urandom", std::ios::in|std::ios::binary);
+            char my_random_char;
+            urandom.read(&my_random_char, sizeof(my_random_char));
+            random_number = static_cast<int>(static_cast<unsigned char>(my_random_char));
+            random_number = random_number % (maximum - minimum + 1) + minimum;
+            urandom.close();
+            return random_number;
         }
 
-        urandom.close();
-        return result;
-
-    }
-
-    const char* get_full_command(const char* command)
+    bool validate_graph(std::vector<std::vector<std::pair<int,int>>> streets_coordinates)
     {
-        const char* full_command = (std::string(command)).c_str();
-        return full_command;
+        if (streets_coordinates.size() == 0)
+        {
+            return false;
+        }
+        for (std::vector<int>::size_type i = 0; i < streets_coordinates.size(); i++)
+        {
+            if (streets_coordinates[i].size() < 2)
+            {
+                return false;
+            }
+            
+            std::vector<std::pair<int,int>> coordinates = streets_coordinates[i];
+            for (std::vector<int>::size_type j = 0; j < coordinates.size(); j++)
+            {
+                if (j == coordinates.size() - 1)
+                {
+                    break;
+                }
+                if (coordinates[j].first == coordinates[j+1].first && coordinates[j].second == coordinates[j+1].second)
+                {
+                    return false;
+                }
+            if (coordinates[j].first == coordinates[j+1].second && coordinates[j].second == coordinates[j+1].first)
+                {
+                    return false;
+                }
+            if (coordinates[j].first == coordinates[j].second)
+                {
+                    return false;
+                }
+        }
+        }
+        return true;
     }
-}   
+
+    std::vector<std::string> create_command_lines(std::vector<std::string> streets_name, 
+    std::vector<std::vector<std::pair<int, int>>> streets_coordinates,
+    std::vector<std::string> old_streets_name, int count)
+    {
+        std::vector<std::string> command_lines;
+        std::string command;
+        if (count != 0)
+        {
+            for (std::vector<int>::size_type i = 0; i < old_streets_name.size(); i++)
+            {
+                command = "rm " + old_streets_name[i];
+                command_lines.push_back(command);
+            }
+        }
+        for (std::vector<int>::size_type i = 0; i < streets_name.size(); i++)
+        {
+            command = "add " + streets_name[i];
+
+            for (std::vector<int>::size_type j = 0; j < streets_coordinates[i].size(); j++)
+            {
+                command = command + " (" + std::to_string(streets_coordinates[i][j].first) + "," + std::to_string(streets_coordinates[i][j].second) + ")"; 
+            } 
+            command_lines.push_back(command);
+        }
+
+        command_lines.push_back("gg");
+        return command_lines;
+    }
+    
+    const char* get_full_command(const char* command)
+        {
+            const char* full_command = (std::string(command)).c_str();
+            return full_command;
+        }
+
+}

@@ -16,7 +16,11 @@ namespace line_parser {
 
 namespace rgen_needs
 {
-    std::vector<int> rgen(int s = 10, int n = 5, int l = 5, int c = 20);
+    int rgen(int maximum, int minimum);
+    bool validate_graph(std::vector<std::vector<std::pair<int, int>>> streets_coordinates);
+    std::vector<std::string> create_command_lines(std::vector<std::string> streets_name,
+    std::vector<std::vector<std::pair<int, int>>> streets_coordinates,
+    std::vector<std::string> old_streets_name, int count);
     const char* get_full_command(const char* command);
 }
 
