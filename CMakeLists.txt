@@ -5,7 +5,8 @@ project(random_graph_shortest_path)
 
 # enable c++11 support
 set (CMAKE_CXX_FLAGS "-std=c++11 -Wall ${CMAKE_CXX_FLAGS}")
-set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/run)
+# set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/run)
+set (CMAKE_BUILD_TYPE Debug)
 
 option(WITH_ASAN "Enabled AddressSanitizer to detect memory faults" OFF)
 if(WITH_ASAN)
@@ -15,8 +16,8 @@ endif()
 
 # create the main executable
 ## add additional .cpp files if needed
-add_executable(find_shortest_path find_shortest_path.cpp )
-add_executable(main main.cpp )
+add_executable(find_shortest_path find_shortest_path.cpp helpers.cpp MyGraph.cpp BFStree.cpp)
+add_executable(main main.cpp helpers.cpp MyGraph.cpp BFStree.cpp)
 add_executable(rgen rgen.cpp helpers.cpp MyGraph.cpp BFStree.cpp)
 
 # create the executable for tests
