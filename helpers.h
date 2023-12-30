@@ -14,9 +14,10 @@ namespace line_parser {
     void analyze_command(std::string command, std::string line, MyGraph &graph);
 }
 
-namespace random_number
+namespace rgen_needs
 {
     std::vector<int> rgen(int s = 10, int n = 5, int l = 5, int c = 20);
+    const char* get_full_command(const char* command);
 }
 
 #endif

@@ -135,7 +135,7 @@ namespace line_parser{
 
 }
 
-namespace random_number
+namespace rgen_needs
 {
     std::vector<int> rgen(int s, int n, int l, int c) 
     {
@@ -174,4 +174,10 @@ namespace random_number
         return result;
 
     }
-}
+
+    const char* get_full_command(const char* command)
+    {
+        const char* full_command = (std::string(command)).c_str();
+        return full_command;
+    }
+}   
