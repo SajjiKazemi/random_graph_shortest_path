@@ -10,7 +10,7 @@ def parse_input(line: str):
         print('Error: You did not obey the requested format', file=sys.stderr)
         return None, None, None
     inputs = re.split("\s", line)
-    if len(inputs) < 4 and inputs[0] != "gg":
+    if len(inputs) < 4 and inputs[0] != "gg" and inputs[0] != "rm":
         print('Error: You did not obey the requested format', file=sys.stderr)
         return None, None, None
     cmd = inputs[0]
